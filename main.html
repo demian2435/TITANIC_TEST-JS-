@@ -1,0 +1,179 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Test Page</title>
+    <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js"></script>
+    <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/addons/p5.dom.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="TITANIC_NN_BIS.js"></script>
+</head>
+<style>
+    #sfondo {
+        border: 10px solid rgb(0, 0, 0);
+        padding: 25px;
+        background: url(titanic.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    #number {
+        width: 3em;
+    }
+
+    #spazio_1 {
+        height: 5%;
+        width: 100%;
+    }
+
+    #spazio_2 {
+        height: 1px;
+        width: 100%;
+    }
+
+    #spazio_3 {
+        height: 2%;
+        width: 100%;
+    }
+
+    #scheda_1 {
+        border: 2px solid rgb(255, 255, 255);
+        background-color: rgba(255, 255, 255, 0.801);
+        height: auto;
+        margin: auto;
+        width: 40%;
+    }
+
+    #scheda_1_titolo {
+        border: 2px solid rgb(255, 255, 255);
+        background-color: rgba(159, 244, 255, 0.801);
+        height: auto;
+        margin: auto;
+        width: 40%;
+    }
+
+    #scheda_2 {
+        border: 2px solid rgb(255, 255, 255);
+        background-color: rgba(255, 255, 255, 0.801);
+        height: auto;
+        margin: auto;
+        width: 80%;
+    }
+
+    #scheda_2_R {
+        border: 2px solid rgb(255, 255, 255);
+        background-color: rgba(255, 255, 255, 0.801);
+        height: auto;
+        margin: auto;
+        width: 80%;
+    }
+
+    #scheda_2_RD {
+        border: 2px solid rgb(255, 255, 255);
+        background-color: rgba(255, 255, 255, 0.801);
+        height: auto;
+        margin: auto;
+        width: 80%;
+    }
+
+    #par_1 {
+        color: #616161;
+        text-shadow: #e0e0e0 1px 1px 0;
+        font-size: 25px;
+    }
+
+    .myButton {
+        color: rgb(255, 255, 255);
+        font-size: 24px;
+        line-height: 24px;
+        padding: 8px;
+        border-radius: 11px;
+        font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+        font-weight: normal;
+        text-decoration: none;
+        font-style: normal;
+        font-variant: normal;
+        text-transform: none;
+        background-image: linear-gradient(rgb(0, 0, 0) 0%, rgb(66, 66, 66) 54%, rgb(191, 191, 191) 100%);
+        box-shadow: rgb(0, 0, 0) 5px 5px 15px 5px;
+        border: 0px solid transparent;
+        display: inline-block;
+        transition: 0.5s;
+    }
+
+    .myButton:hover {
+        cursor: pointer;
+        background: #000000;
+    }
+
+    .myButton:active {
+        background: #BFBFBF;
+    }
+</style>
+
+<body id="sfondo" align="center">
+    <div id="scheda_1_titolo" align="center">
+        <h1 id="par_1" align="center">TEST LEONARDO</h1>
+    </div>
+    <div id="spazio_1"></div>
+    <div id="scheda_2">
+        <p id="par_1">Seleziona una classe:
+            <input id="classe_1" type="radio" name="classe" value="1" checked> Prima Classe
+            <input id="classe_2" type="radio" name="classe" value="2"> Seconda Classe
+            <input id="classe_3" type="radio" name="classe" value="3"> Terza Classe
+        </p>
+        <div id="spazio_2"></div>
+        <p id="par_1">Seleziona il sesso:
+            <input id="sesso_1" type="radio" name="sesso" value="1" checked> Uomo
+            <input id="sesso_2" type="radio" name="sesso" value="0"> Donna
+        </p>
+        <div id="spazio_2"></div>
+        <p id="par_1">Seleziona l'età:
+            <input id="number" type="number" placeholder="40" step="1" min="0" max="80">
+        </p>
+        <div id="spazio_3"></div>
+        <input class="myButton" type="button" value="Testa i dati inseriti" onclick="TEST_LEONARDO()">
+        <div id="spazio_1"></div>
+    </div>
+    <div id="spazio_3"></div>
+    <div id="scheda_2_R">
+        <p id="par_1">La probabilità di sopravvivenza è pari al:</p>
+        <h1 id="risultato">0%</h1>
+    </div>
+    <div id="spazio_1"></div>
+    <div id="scheda_1_titolo" align="center">
+        <h1 id="par_1" align="center">CONSULTA DATABASE</h1>
+    </div>
+    <div id="spazio_1"></div>
+    <div id="scheda_2">
+        <p id="par_1">Seleziona una classe:
+            <input id="classe_ALL_D" type="radio" name="classe_d" value="99" checked> Tutte //
+            <input id="classe_1_D" type="radio" name="classe_d" value="1"> Prima Classe
+            <input id="classe_2_D" type="radio" name="classe_d" value="2"> Seconda Classe
+            <input id="classe_3_D" type="radio" name="classe_d" value="3"> Terza Classe
+        </p>
+        <div id="spazio_2"></div>
+        <p id="par_1">Seleziona il sesso:
+            <input id="sesso_ALL_D" type="radio" name="sesso_d" value="99" checked> Entrambi //
+            <input id="sesso_1_D" type="radio" name="sesso_d" value="1"> Uomo
+            <input id="sesso_2_D" type="radio" name="sesso_d" value="0"> Donna
+        </p>
+        <div id="spazio_2"></div>
+        <p id="par_1">Seleziona il range dell'età da:
+            <input id="number_D1" type="number" placeholder="0" step="1" min="0" max="80"> a:
+            <input id="number_D2" type="number" placeholder="80" step="1" min="0" max="80">
+        </p>
+        <div id="spazio_3"></div>
+        <input class="myButton" type="button" value="Consulta il Database" onclick="TEST_DATABASE()">
+        <div id="spazio_1"></div>
+    </div>
+    <div id="spazio_3"></div>
+    <div id="scheda_2_RD">
+        <p id="par_1">Totale passeggeri corrispondenti alla ricerca:</p>
+        <h1 id="risultato_1D">0 su 1309 - (0% del totale passeggeri)</h1>
+        <p id="par_1">Totale sopravvisuti all'interno del campione di ricerca:</p>
+        <h1 id="risultato_2D">0 su 0 - (0% del campione ricercato)</h1>
+    </div>
+</body>
+
+</html>
